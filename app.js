@@ -39,7 +39,7 @@ const enterAnimation = (current, done, gradient) => {
   const text = current.querySelector(".showcase-text");
   const circles = current.querySelectorAll(".circle");
   const arrow = current.querySelector(".showcase-arrow");
-  
+
   return (
     tlEnter.fromTo(
       arrow,
@@ -49,9 +49,7 @@ const enterAnimation = (current, done, gradient) => {
     tlEnter.to("body", { background: gradient }, "<"),
     tlEnter.fromTo(product, { y: -100, opacity: 0 }, { y: 0, opacity: 1 }, "<"),
     tlEnter.fromTo(text, { y: 100, opacity: 0 }, { opacity: 1, y: 0 }, "<"),
-    tlEnter.fromTo(
-      circles,
-      { y: -200, opacity: 0 },
+    tlEnter.fromTo(circles,{ y: -200, opacity: 0 },
       {
         y: 0,
         opacity: 1,
@@ -78,7 +76,21 @@ barba.init({
       enter(data) {
         const done = this.async();
         let next = data.next.container;
+        let gradient = getGradient(data.next.namespace);
+        enterAnimation(next, done, gradient);
       },
     },
   ],
 });
+
+//changing gradient of each product
+function getGradient(name) {
+  switch (name) {
+    case "handbag":
+      return "linear-gradient(260deg, #b75d62, #754d4f)";
+    case "boot":
+      return "linear-gradient(260deg, #5d8cb7, #4c4f70)";
+    case "hat":
+      return "linear-gradient(260deg, #b27a5c, #7f5450)";
+  }
+}

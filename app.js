@@ -39,6 +39,7 @@ const enterAnimation = (current, done, gradient) => {
   const text = current.querySelector(".showcase-text");
   const circles = current.querySelectorAll(".circle");
   const arrow = current.querySelector(".showcase-arrow");
+  
   return (
     tlEnter.fromTo(
       arrow,

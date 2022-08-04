@@ -49,7 +49,9 @@ const enterAnimation = (current, done, gradient) => {
     tlEnter.to("body", { background: gradient }, "<"),
     tlEnter.fromTo(product, { y: -100, opacity: 0 }, { y: 0, opacity: 1 }, "<"),
     tlEnter.fromTo(text, { y: 100, opacity: 0 }, { opacity: 1, y: 0 }, "<"),
-    tlEnter.fromTo(circles,{ y: -200, opacity: 0 },
+    tlEnter.fromTo(
+      circles,
+      { y: -200, opacity: 0 },
       {
         y: 0,
         opacity: 1,
@@ -68,6 +70,13 @@ barba.init({
     //showcase transitions
     {
       name: "default",
+      once(data) {
+        const done = this.async();
+        let next = data.next.container;
+        let gradient = getGradient(data.next.namespace);
+        gsap.set("body", { background: gradient });
+        enterAnimation(next, done, gradient);
+      },
       leave(data) {
         const done = this.async();
         let current = data.current.container;
@@ -83,7 +92,7 @@ barba.init({
   ],
 });
 
-//changing gradient of each product
+//changing gradient of each product page
 function getGradient(name) {
   switch (name) {
     case "handbag":
